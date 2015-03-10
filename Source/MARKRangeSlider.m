@@ -151,6 +151,9 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 - (void)handleLeftPan:(UIPanGestureRecognizer *)gesture
 {
     if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
+        //Fix when minimumDistance = 0.0 and slider is move to 1.0-1.0
+        [self bringSubviewToFront:self.leftThumbImageView];
+        
         CGPoint translation = [gesture translationInView:self];
         CGFloat trackRange = self.maximumValue - self.minimumValue;
         CGFloat width = CGRectGetWidth(self.frame) - CGRectGetWidth(self.leftThumbImageView.frame);
@@ -167,6 +170,9 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 - (void)handleRightPan:(UIPanGestureRecognizer *)gesture
 {
     if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
+        //Fix when minimumDistance = 0.0 and slider is move to 1.0-1.0
+        [self bringSubviewToFront:self.rightThumbImageView];
+
         CGPoint translation = [gesture translationInView:self];
         CGFloat trackRange = self.maximumValue - self.minimumValue;
         CGFloat width = CGRectGetWidth(self.frame) - CGRectGetWidth(self.rightThumbImageView.frame);
