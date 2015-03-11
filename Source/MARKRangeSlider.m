@@ -16,11 +16,11 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 
 @interface MARKRangeSlider ()
 
-@property (nonatomic, strong) UIImageView *trackImageView;
-@property (nonatomic, strong) UIImageView *rangeImageView;
+@property (nonatomic) UIImageView *trackImageView;
+@property (nonatomic) UIImageView *rangeImageView;
 
-@property (nonatomic, strong) UIImageView *leftThumbImageView;
-@property (nonatomic, strong) UIImageView *rightThumbImageView;
+@property (nonatomic) UIImageView *leftThumbImageView;
+@property (nonatomic) UIImageView *rightThumbImageView;
 
 @end
 
@@ -153,7 +153,7 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
     if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
         //Fix when minimumDistance = 0.0 and slider is move to 1.0-1.0
         [self bringSubviewToFront:self.leftThumbImageView];
-        
+
         CGPoint translation = [gesture translationInView:self];
         CGFloat trackRange = self.maximumValue - self.minimumValue;
         CGFloat width = CGRectGetWidth(self.frame) - CGRectGetWidth(self.leftThumbImageView.frame);
