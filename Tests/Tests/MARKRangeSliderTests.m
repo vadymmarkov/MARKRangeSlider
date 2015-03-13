@@ -11,6 +11,16 @@
 
 #import "MARKRangeSlider.h"
 
+@interface MARKRangeSlider ()
+
+@property (nonatomic) UIImageView *trackImageView;
+@property (nonatomic) UIImageView *rangeImageView;
+
+@property (nonatomic) UIImageView *leftThumbImageView;
+@property (nonatomic) UIImageView *rightThumbImageView;
+
+@end
+
 @interface MARKRangeSliderTests : XCTestCase
 
 @property (nonatomic, strong) MARKRangeSlider *rangeSlider;
@@ -64,7 +74,7 @@
 {
     self.rangeSlider.maximumValue = 1.0f;
     self.rangeSlider.minimumValue = 1.2f;
-    
+
     XCTAssertEqual(self.rangeSlider.minimumValue, self.rangeSlider.maximumValue - self.rangeSlider.minimumDistance, @"Minimum value should be less than maximum value");
     self.rangeSlider.minimumValue = 1.0;
     XCTAssertEqual(self.rangeSlider.minimumValue, self.rangeSlider.maximumValue - self.rangeSlider.minimumDistance, @"Minimum value should be less than maximum value");
@@ -198,6 +208,34 @@
     XCTAssertEqual(self.rangeSlider.minimumDistance, 0.5, @"Minimum distance does not set properly");
     XCTAssertEqual(self.rangeSlider.leftValue, self.rangeSlider.minimumValue, @"Left value should equal to minimum value");
     XCTAssertEqual(self.rangeSlider.rightValue, self.rangeSlider.maximumValue, @"Right value should equal to maximum value");
+}
+
+- (void)testSetTrackImage
+{
+    UIImage *image = [[UIImage alloc] init];
+    self.rangeSlider.trackImage = image;
+    XCTAssertEqualObjects(self.rangeSlider.trackImageView.image, image, @"Track image does not set properly");
+}
+
+- (void)testSetRangeImage
+{
+    UIImage *image = [[UIImage alloc] init];
+    self.rangeSlider.rangeImage = image;
+    XCTAssertEqualObjects(self.rangeSlider.rangeImageView.image, image, @"Range image does not set properly");
+}
+
+- (void)testSetLeftThumbImage
+{
+    UIImage *image = [[UIImage alloc] init];
+    self.rangeSlider.leftThumbImage = image;
+    XCTAssertEqualObjects(self.rangeSlider.leftThumbImageView.image, image, @"Left thumb image does not set properly");
+}
+
+- (void)testSetRightThumbImage
+{
+    UIImage *image = [[UIImage alloc] init];
+    self.rangeSlider.rightThumbImage = image;
+    XCTAssertEqualObjects(self.rangeSlider.rightThumbImageView.image, image, @"Right thumb image does not set properly");
 }
 
 - (void)testCheckMinimumDistance
