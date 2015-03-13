@@ -1,11 +1,3 @@
-//
-//  MARKRangeSliderTests.m
-//  MARKRangeSliderDemo
-//
-//  Created by Vadym Markov on 2/8/15.
-//  Copyright (c) 2015 Vadym Markov. All rights reserved.
-//
-
 @import UIKit;
 @import XCTest;
 

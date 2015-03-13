@@ -1,13 +1,5 @@
-//
-//  DemoTests.m
-//  DemoTests
-//
-//  Created by Vadym Markov on 06/03/15.
-//  Copyright (c) 2015 Vadym Markov. All rights reserved.
-//
-
-#import <UIKit/UIKit.h>
-#import <XCTest/XCTest.h>
+@import UIKit;
+@import XCTest;
 
 @interface DemoTests : XCTestCase
 

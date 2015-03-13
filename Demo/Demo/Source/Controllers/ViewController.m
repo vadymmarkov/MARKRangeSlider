@@ -1,11 +1,3 @@
-//
-//  ViewController.m
-//  Demo
-//
-//  Created by Vadym Markov on 2/7/15.
-//  Copyright (c) 2015 Vadym Markov. All rights reserved.
-//
-
 #import "ViewController.h"
 #import "MARKRangeSlider.h"
 #import "UIColor+Demo.h"

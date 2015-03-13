@@ -1,11 +1,3 @@
-//
-//  UIColor+Demo.m
-//  Demo
-//
-//  Created by Vadym Markov on 2/5/15.
-//  Copyright (c) 2015 Vadym Markov. All rights reserved.
-//
-
 #import "UIColor+Demo.h"
 
 @implementation UIColor (Demo)

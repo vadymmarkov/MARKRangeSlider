@@ -1,11 +1,3 @@
-//
-//  AppDelegate.m
-//  Demo
-//
-//  Created by Vadym Markov on 2/7/15.
-//  Copyright (c) 2015 Vadym Markov. All rights reserved.
-//
-
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "UIColor+Demo.h"
