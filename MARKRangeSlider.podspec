@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "MARKRangeSlider"
-  s.version          = "0.1.2"
+  s.version          = "0.1.3"
   s.summary          = "An easy-to-use multitouch range slider"
   s.homepage         = "https://github.com/markvaldy/MARKRangeSlider"
   s.license          = {
