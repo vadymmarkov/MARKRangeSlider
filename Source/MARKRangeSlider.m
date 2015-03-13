@@ -26,6 +26,11 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 
 @implementation MARKRangeSlider
 
+@synthesize trackImage = _trackImage;
+@synthesize rangeImage = _rangeImage;
+@synthesize leftThumbImage = _leftThumbImage;
+@synthesize rightThumbImage = _rightThumbImage;
+
 #pragma mark - Initialization
 
 - (id)init
@@ -322,6 +327,34 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 
     [self setNeedsLayout];
 }
+
+#pragma mark - Setters
+
+- (void)setTrackImage:(UIImage *)trackImage
+{
+    _trackImage = trackImage;
+    self.trackImageView.image = _trackImage;
+}
+
+- (void)setRangeImage:(UIImage *)rangeImage
+{
+    _rangeImage = rangeImage;
+    self.rangeImageView.image = _rangeImage;
+}
+
+- (void)setLeftThumbImage:(UIImage *)leftThumbImage
+{
+    _leftThumbImage = leftThumbImage;
+    self.leftThumbImageView.image = _leftThumbImage;
+}
+
+- (void)setRightThumbImage:(UIImage *)rightThumbImage
+{
+    _rightThumbImage = rightThumbImage;
+    self.rightThumbImageView.image = _rightThumbImage;
+}
+
+#pragma mark - Helpers
 
 - (void)checkMinimumDistance
 {
