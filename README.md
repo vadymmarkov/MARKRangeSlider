@@ -8,6 +8,9 @@ A custom reusable slider control with 2 thumbs (range slider). Values range is b
 
 Please check Demo project for a basic example on how to use MARKRangeSlider.
 
+### Demo
+![Alt text](https://cloud.githubusercontent.com/assets/10529867/6666031/88515f20-cbe0-11e4-83d7-a8bca824ab67.gif "Demo")
+
 ### Available control properties
 - `minimumValue` - the minimum value of the slider's range
 - `maximumValue` - the maximum value of the slider's range
