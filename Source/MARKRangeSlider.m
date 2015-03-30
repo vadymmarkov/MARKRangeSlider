@@ -267,8 +267,21 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 - (void)setLeftValue:(CGFloat)leftValue
 {
     CGFloat allowedValue = self.rightValue - self.minimumDistance;
+    
     if (leftValue > allowedValue) {
-        leftValue = allowedValue;
+        if (self.pushable) {
+            CGFloat rightSpace = self.maximumValue - self.rightValue;
+            CGFloat deltaLeft = leftValue - _leftValue;
+            if (deltaLeft > 0 && rightSpace > deltaLeft) {
+                self.rightValue += deltaLeft;
+            }
+            else {
+                leftValue = allowedValue;
+            }
+        }
+        else {
+            leftValue = allowedValue;
+        }
     }
 
     if (leftValue < self.minimumValue) {
@@ -287,7 +300,19 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 {
     CGFloat allowedValue = self.leftValue + self.minimumDistance;
     if (rightValue < allowedValue) {
-        rightValue = allowedValue;
+        if (self.pushable) {
+            CGFloat leftSpace = self.leftValue - self.minimumValue;
+            CGFloat deltaRight = _rightValue - rightValue;
+            if (deltaRight > 0 && leftSpace > deltaRight) {
+                self.leftValue -= deltaRight;
+            }
+            else {
+                rightValue = allowedValue;
+            }
+        }
+        else {
+            rightValue = allowedValue;
+        }
     }
 
     if (rightValue > self.maximumValue) {
