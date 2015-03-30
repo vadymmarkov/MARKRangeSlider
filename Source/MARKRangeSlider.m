@@ -97,6 +97,7 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
     // Add right pan recognizer
     UIPanGestureRecognizer *rightPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightPan:)];
     [self.rightThumbImageView addGestureRecognizer:rightPanRecognizer];
+    
 }
 
 #pragma mark - Layout
@@ -112,6 +113,10 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 
     CGFloat leftAvailableWidth = width - leftThumbImageSize.width;
     CGFloat rightAvailableWidth = width - rightThumbImageSize.width;
+    if (self.trackByEdges) {
+        leftAvailableWidth -= leftThumbImageSize.width;
+        rightAvailableWidth -= rightThumbImageSize.width;
+    }
 
     CGFloat leftInset = leftThumbImageSize.width / 2;
     CGFloat rightInset = rightThumbImageSize.width / 2;
@@ -132,15 +137,29 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
     CGFloat gap = 1.0;
 
     // Set track frame
-    self.trackImageView.frame = CGRectMake(gap, trackY, width - gap, kMARKRangeSliderTrackHeight);
+    CGFloat trackX = gap;
+    CGFloat trackWidth = width - gap*2;
+    if (self.trackByEdges) {
+        trackX += leftInset;
+        trackWidth -= leftInset+rightInset;
+    }
+    self.trackImageView.frame = CGRectMake(trackX, trackY, trackWidth, kMARKRangeSliderTrackHeight);
 
     // Set range frame
     CGFloat rangeWidth = rightX - leftX;
+    if (self.trackByEdges) {
+        rangeWidth += rightInset + gap;
+    }
     self.rangeImageView.frame = CGRectMake(leftX + leftInset, trackY, rangeWidth, kMARKRangeSliderTrackHeight);
 
     // Set left & right thumb frames
-    self.leftThumbImageView.center = CGPointMake(leftX + leftInset, height / 2);
-    self.rightThumbImageView.center = CGPointMake(rightX + rightInset, height / 2);
+    leftX += leftInset;
+    rightX += rightInset;
+    if (self.trackByEdges) {
+        rightX = rightX + rightInset*2 - gap;
+    }
+    self.leftThumbImageView.center = CGPointMake(leftX, height / 2);
+    self.rightThumbImageView.center = CGPointMake(rightX, height / 2);
 }
 
 #pragma mark - Gesture recognition
