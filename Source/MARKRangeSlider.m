@@ -1,4 +1,5 @@
 #import "MARKRangeSlider.h"
+#import "ADToolTipView.h"
 
 static NSString * const kMARKRangeSliderThumbImage = @"rangeSliderThumb.png";
 static NSString * const kMARKRangeSliderTrackImage = @"rangeSliderTrack.png";
@@ -113,7 +114,7 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 
     CGFloat leftAvailableWidth = width - leftThumbImageSize.width;
     CGFloat rightAvailableWidth = width - rightThumbImageSize.width;
-    if (self.trackByEdges) {
+    if (self.disableOverlapping) {
         leftAvailableWidth -= leftThumbImageSize.width;
         rightAvailableWidth -= rightThumbImageSize.width;
     }
@@ -139,7 +140,7 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
     // Set track frame
     CGFloat trackX = gap;
     CGFloat trackWidth = width - gap*2;
-    if (self.trackByEdges) {
+    if (self.disableOverlapping) {
         trackX += leftInset;
         trackWidth -= leftInset+rightInset;
     }
@@ -147,7 +148,7 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 
     // Set range frame
     CGFloat rangeWidth = rightX - leftX;
-    if (self.trackByEdges) {
+    if (self.disableOverlapping) {
         rangeWidth += rightInset + gap;
     }
     self.rangeImageView.frame = CGRectMake(leftX + leftInset, trackY, rangeWidth, kMARKRangeSliderTrackHeight);
@@ -155,7 +156,7 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
     // Set left & right thumb frames
     leftX += leftInset;
     rightX += rightInset;
-    if (self.trackByEdges) {
+    if (self.disableOverlapping) {
         rightX = rightX + rightInset*2 - gap;
     }
     self.leftThumbImageView.center = CGPointMake(leftX, height / 2);
