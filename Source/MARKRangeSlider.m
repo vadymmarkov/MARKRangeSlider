@@ -1,5 +1,4 @@
 #import "MARKRangeSlider.h"
-#import "ADToolTipView.h"
 
 static NSString * const kMARKRangeSliderThumbImage = @"rangeSliderThumb.png";
 static NSString * const kMARKRangeSliderTrackImage = @"rangeSliderTrack.png";
@@ -98,7 +97,6 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
     // Add right pan recognizer
     UIPanGestureRecognizer *rightPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightPan:)];
     [self.rightThumbImageView addGestureRecognizer:rightPanRecognizer];
-    
 }
 
 #pragma mark - Layout
@@ -139,10 +137,10 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 
     // Set track frame
     CGFloat trackX = gap;
-    CGFloat trackWidth = width - gap*2;
+    CGFloat trackWidth = width - gap * 2;
     if (self.disableOverlapping) {
         trackX += leftInset;
-        trackWidth -= leftInset+rightInset;
+        trackWidth -= leftInset + rightInset;
     }
     self.trackImageView.frame = CGRectMake(trackX, trackY, trackWidth, kMARKRangeSliderTrackHeight);
 
@@ -157,7 +155,7 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
     leftX += leftInset;
     rightX += rightInset;
     if (self.disableOverlapping) {
-        rightX = rightX + rightInset*2 - gap;
+        rightX = rightX + rightInset * 2 - gap;
     }
     self.leftThumbImageView.center = CGPointMake(leftX, height / 2);
     self.rightThumbImageView.center = CGPointMake(rightX, height / 2);
@@ -287,11 +285,10 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 - (void)setLeftValue:(CGFloat)leftValue
 {
     CGFloat allowedValue = self.rightValue - self.minimumDistance;
-    
     if (leftValue > allowedValue) {
         if (self.pushable) {
             CGFloat rightSpace = self.maximumValue - self.rightValue;
-            CGFloat deltaLeft = leftValue - _leftValue;
+            CGFloat deltaLeft = self.minimumDistance - (self.rightValue - leftValue);
             if (deltaLeft > 0 && rightSpace > deltaLeft) {
                 self.rightValue += deltaLeft;
             }
@@ -322,7 +319,7 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
     if (rightValue < allowedValue) {
         if (self.pushable) {
             CGFloat leftSpace = self.leftValue - self.minimumValue;
-            CGFloat deltaRight = _rightValue - rightValue;
+            CGFloat deltaRight = self.minimumDistance - (rightValue - self.leftValue);
             if (deltaRight > 0 && leftSpace > deltaRight) {
                 self.leftValue -= deltaRight;
             }
