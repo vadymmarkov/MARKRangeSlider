@@ -11,6 +11,9 @@
 
 @property (nonatomic, assign) CGFloat minimumDistance;
 
+@property (nonatomic) BOOL pushable;
+@property (nonatomic) BOOL disableOverlapping;
+
 // Images
 @property (nonatomic) UIImage *trackImage;
 @property (nonatomic) UIImage *rangeImage;

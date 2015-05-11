@@ -112,6 +112,10 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 
     CGFloat leftAvailableWidth = width - leftThumbImageSize.width;
     CGFloat rightAvailableWidth = width - rightThumbImageSize.width;
+    if (self.disableOverlapping) {
+        leftAvailableWidth -= leftThumbImageSize.width;
+        rightAvailableWidth -= rightThumbImageSize.width;
+    }
 
     CGFloat leftInset = leftThumbImageSize.width / 2;
     CGFloat rightInset = rightThumbImageSize.width / 2;
@@ -132,15 +136,29 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
     CGFloat gap = 1.0;
 
     // Set track frame
-    self.trackImageView.frame = CGRectMake(gap, trackY, width - gap, kMARKRangeSliderTrackHeight);
+    CGFloat trackX = gap;
+    CGFloat trackWidth = width - gap * 2;
+    if (self.disableOverlapping) {
+        trackX += leftInset;
+        trackWidth -= leftInset + rightInset;
+    }
+    self.trackImageView.frame = CGRectMake(trackX, trackY, trackWidth, kMARKRangeSliderTrackHeight);
 
     // Set range frame
     CGFloat rangeWidth = rightX - leftX;
+    if (self.disableOverlapping) {
+        rangeWidth += rightInset + gap;
+    }
     self.rangeImageView.frame = CGRectMake(leftX + leftInset, trackY, rangeWidth, kMARKRangeSliderTrackHeight);
 
     // Set left & right thumb frames
-    self.leftThumbImageView.center = CGPointMake(leftX + leftInset, height / 2);
-    self.rightThumbImageView.center = CGPointMake(rightX + rightInset, height / 2);
+    leftX += leftInset;
+    rightX += rightInset;
+    if (self.disableOverlapping) {
+        rightX = rightX + rightInset * 2 - gap;
+    }
+    self.leftThumbImageView.center = CGPointMake(leftX, height / 2);
+    self.rightThumbImageView.center = CGPointMake(rightX, height / 2);
 }
 
 #pragma mark - Gesture recognition
@@ -268,7 +286,19 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 {
     CGFloat allowedValue = self.rightValue - self.minimumDistance;
     if (leftValue > allowedValue) {
-        leftValue = allowedValue;
+        if (self.pushable) {
+            CGFloat rightSpace = self.maximumValue - self.rightValue;
+            CGFloat deltaLeft = self.minimumDistance - (self.rightValue - leftValue);
+            if (deltaLeft > 0 && rightSpace > deltaLeft) {
+                self.rightValue += deltaLeft;
+            }
+            else {
+                leftValue = allowedValue;
+            }
+        }
+        else {
+            leftValue = allowedValue;
+        }
     }
 
     if (leftValue < self.minimumValue) {
@@ -287,7 +317,19 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 {
     CGFloat allowedValue = self.leftValue + self.minimumDistance;
     if (rightValue < allowedValue) {
-        rightValue = allowedValue;
+        if (self.pushable) {
+            CGFloat leftSpace = self.leftValue - self.minimumValue;
+            CGFloat deltaRight = self.minimumDistance - (rightValue - self.leftValue);
+            if (deltaRight > 0 && leftSpace > deltaRight) {
+                self.leftValue -= deltaRight;
+            }
+            else {
+                rightValue = allowedValue;
+            }
+        }
+        else {
+            rightValue = allowedValue;
+        }
     }
 
     if (rightValue > self.maximumValue) {

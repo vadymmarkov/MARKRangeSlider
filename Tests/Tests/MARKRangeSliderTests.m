@@ -120,6 +120,24 @@
 
 #pragma mark - Left value tests
 
+- (void)testSetLeftValuePushesRightValue
+{
+    self.rangeSlider.pushable = YES;
+    self.rangeSlider.rightValue = 0.7;
+    self.rangeSlider.minimumDistance = 0.2;
+    self.rangeSlider.leftValue = 0.6;
+    XCTAssertEqual(self.rangeSlider.rightValue, self.rangeSlider.leftValue + self.rangeSlider.minimumDistance, @"Right value should be equal to left value plus minimum distance");
+}
+
+- (void)testSetLeftValueDoesntPushRightValue
+{
+    self.rangeSlider.pushable = YES;
+    self.rangeSlider.rightValue = 1.0;
+    self.rangeSlider.minimumDistance = 0.2;
+    self.rangeSlider.leftValue = 0.9;
+    XCTAssertEqual(self.rangeSlider.leftValue, self.rangeSlider.rightValue - self.rangeSlider.minimumDistance, @"Left value should be equal to right value minus minimum distance");
+}
+
 - (void)testSetLeftValueExceedsMinimumDistance
 {
     self.rangeSlider.rightValue = 1.0;
@@ -150,6 +168,24 @@
 }
 
 #pragma mark - Right value tests
+
+- (void)testSetRightValuePushesLeftValue
+{
+    self.rangeSlider.pushable = YES;
+    self.rangeSlider.minimumDistance = 0.2;
+    self.rangeSlider.leftValue = 0.6;
+    self.rangeSlider.rightValue = 0.7;
+    XCTAssertEqual(self.rangeSlider.leftValue, self.rangeSlider.rightValue - self.rangeSlider.minimumDistance, @"Left value should be equal to right value minus minimum distance");
+}
+
+- (void)testSetRightValueDoesntPushLeftValue
+{
+    self.rangeSlider.pushable = YES;
+    self.rangeSlider.minimumDistance = 0.2;
+    self.rangeSlider.leftValue = 0.0;
+    self.rangeSlider.rightValue = 0.1;
+    XCTAssertEqual(self.rangeSlider.rightValue, self.rangeSlider.leftValue + self.rangeSlider.minimumDistance, @"Right value should be equal to left value plus minimum distance");
+}
 
 - (void)testSetRightValueExceedsMinimumDistance
 {
