@@ -17,8 +17,8 @@ Please check Demo project for a basic example on how to use MARKRangeSlider.
 - `leftValue` - the value of the left thumb
 - `rightValue` - the value of the right thumb
 - `minimumDistance` - the distance between 2 thumbs (thumbs can't be closer to each other than this distance)
-- 'pushable' - allows the user to push both controls
-- 'disableOverlapping' - disables the overlaping of thumb controls
+- `pushable` - allows the user to push both controls
+- `disableOverlapping` - disables the overlaping of thumb controls
 
 ## Available styling properties
 Images are customizable, default ones are used when no image is provided.
@@ -31,8 +31,7 @@ Images are customizable, default ones are used when no image is provided.
 
 #### In your View Controller
 ```objc
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     // ...
     self.rangeSlider = [[MARKRangeSlider alloc] initWithFrame:CGRectZero];
     [self.rangeSlider addTarget:self
@@ -48,8 +47,7 @@ Images are customizable, default ones are used when no image is provided.
     // ...
 }
 
-- (void)rangeSliderValueDidChange:(MARKRangeSlider *)slider
-{
+- (void)rangeSliderValueDidChange:(MARKRangeSlider *)slider {
     NSLog(@"%0.2f - %0.2f", slider.leftValue, slider.rightValue);
 }
 
