@@ -206,8 +206,7 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 - (UIImage *)trackImage
 {
     if (!_trackImage) {
-        UIImage *image = [UIImage imageNamed:kMARKRangeSliderTrackImage];
-        _trackImage = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 2.0, 0.0, 2.0)];
+        _trackImage = [UIImage imageNamed:kMARKRangeSliderTrackImage];
     }
     return _trackImage;
 }
@@ -215,8 +214,7 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 - (UIImage *)rangeImage
 {
     if (!_rangeImage) {
-        UIImage *image = [UIImage imageNamed:kMARKRangeSliderTrackRangeImage];
-        _rangeImage = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 2.0, 0.0, 2.0)];
+        _rangeImage = [UIImage imageNamed:kMARKRangeSliderTrackRangeImage];
     }
     return _rangeImage;
 }
