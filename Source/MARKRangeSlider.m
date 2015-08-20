@@ -25,16 +25,6 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
 
 #pragma mark - Initialization
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        [self setDefaults];
-        [self setUpViewComponents];
-    }
-    return self;
-}
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
