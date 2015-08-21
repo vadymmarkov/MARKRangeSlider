@@ -4,8 +4,6 @@ static NSString * const kMARKRangeSliderThumbImage = @"rangeSliderThumb.png";
 static NSString * const kMARKRangeSliderTrackImage = @"rangeSliderTrack.png";
 static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRange.png";
 
-static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
-
 @interface MARKRangeSlider ()
 
 @property (nonatomic) UIImageView *trackImageView;
@@ -96,6 +94,8 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
     // Calculate coords & sizes
     CGFloat width = CGRectGetWidth(self.frame);
     CGFloat height = CGRectGetHeight(self.frame);
+    
+    CGFloat trackHeight = _trackImage.size.height;
 
     CGSize leftThumbImageSize = self.leftThumbImageView.frame.size;
     CGSize rightThumbImageSize = self.rightThumbImageView.frame.size;
@@ -122,7 +122,7 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
         rightX = 0.0;
     }
 
-    CGFloat trackY = (height - kMARKRangeSliderTrackHeight) / 2;
+    CGFloat trackY = (height - trackHeight) / 2;
     CGFloat gap = 1.0;
 
     // Set track frame
@@ -132,14 +132,14 @@ static CGFloat const kMARKRangeSliderTrackHeight = 2.0;
         trackX += leftInset;
         trackWidth -= leftInset + rightInset;
     }
-    self.trackImageView.frame = CGRectMake(trackX, trackY, trackWidth, kMARKRangeSliderTrackHeight);
+    self.trackImageView.frame = CGRectMake(trackX, trackY, trackWidth, trackHeight);
 
     // Set range frame
     CGFloat rangeWidth = rightX - leftX;
     if (self.disableOverlapping) {
         rangeWidth += rightInset + gap;
     }
-    self.rangeImageView.frame = CGRectMake(leftX + leftInset, trackY, rangeWidth, kMARKRangeSliderTrackHeight);
+    self.rangeImageView.frame = CGRectMake(leftX + leftInset, trackY, rangeWidth, trackHeight);
 
     // Set left & right thumb frames
     leftX += leftInset;
