@@ -89,6 +89,13 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
 
 #pragma mark - Layout
 
+- (CGSize)intrinsicContentSize {
+    CGFloat width = _trackImage.size.width + _leftThumbImage.size.width + _rightThumbImage.size.width;
+    CGFloat height = MAX(_leftThumbImage.size.height, _rightThumbImage.size.height);
+    
+    return CGSizeMake(width, height);
+}
+
 - (void)layoutSubviews
 {
     // Calculate coords & sizes
