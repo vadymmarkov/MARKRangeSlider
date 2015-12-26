@@ -3,8 +3,6 @@
 @interface MARKRangeSlider : UIControl
 
 // Values
-@property (nonatomic, assign) CGFloat minimumValue;
-@property (nonatomic, assign) CGFloat maximumValue;
 
 @property (nonatomic, assign) CGFloat leftValue;
 @property (nonatomic, assign) CGFloat rightValue;
