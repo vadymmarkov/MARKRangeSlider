@@ -6,8 +6,8 @@
 @property (nonatomic, assign, readonly) CGFloat minimumValue;
 @property (nonatomic, assign, readonly) CGFloat maximumValue;
 
-@property (nonatomic, assign) CGFloat leftValue;
-@property (nonatomic, assign) CGFloat rightValue;
+@property (nonatomic, assign, readonly) CGFloat leftValue;
+@property (nonatomic, assign, readonly) CGFloat rightValue;
 
 @property (nonatomic, assign) CGFloat minimumDistance;
 
@@ -22,6 +22,7 @@
 @property (nonatomic) UIImage *rightThumbImage;
 
 // Configuration
-- (void)setRangeWithMinValue:(CGFloat)minValue maxValue:(CGFloat)maxValue;
+- (void)setMinValue:(CGFloat)minValue maxValue:(CGFloat)maxValue;
+- (void)setLeftValue:(CGFloat)leftValue rightValue:(CGFloat)rightValue;
 
 @end
