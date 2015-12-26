@@ -1,0 +1,14 @@
+PODS:
+  - MARKRangeSlider (0.2.0)
+
+DEPENDENCIES:
+  - MARKRangeSlider (from `../`)
+
+EXTERNAL SOURCES:
+  MARKRangeSlider:
+    :path: ../
+
+SPEC CHECKSUMS:
+  MARKRangeSlider: fc8c09badd7a7968647ca546b26e8745a935ea19
+
+COCOAPODS: 0.39.0

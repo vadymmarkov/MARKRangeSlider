@@ -19,5 +19,7 @@ Pod::Spec.new do |s|
   s.frameworks = 'UIKit'
 
   s.source_files = 'Source/**/*.{h,m}'
-  s.resources = 'Resources/**/*'
+  s.resource_bundles = {
+      'MARKRangeSlider' => ['Resources/**/*']
+  }
 end
