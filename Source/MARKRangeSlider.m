@@ -46,8 +46,8 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
 #pragma mark - Public
 
 - (void)setRangeWithMinValue:(CGFloat)minValue maxValue:(CGFloat)maxValue {
-  self.maximumValue = maxValue;
-  self.minimumValue = minValue;
+    self.maximumValue = maxValue;
+    self.minimumValue = minValue;
 }
 
 #pragma mark - Configuration
