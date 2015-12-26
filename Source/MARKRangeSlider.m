@@ -6,9 +6,6 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
 
 @interface MARKRangeSlider ()
 
-@property (nonatomic, assign) CGFloat minimumValue;
-@property (nonatomic, assign) CGFloat maximumValue;
-
 @property (nonatomic) UIImageView *trackImageView;
 @property (nonatomic) UIImageView *rangeImageView;
 
@@ -44,6 +41,13 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
         [self setUpViewComponents];
     }
     return self;
+}
+
+#pragma mark - Public
+
+- (void)setRangeWithMinValue:(CGFloat)minValue maxValue:(CGFloat)maxValue {
+  self.maximumValue = maxValue;
+  self.minimumValue = minValue;
 }
 
 #pragma mark - Configuration
