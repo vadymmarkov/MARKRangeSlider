@@ -43,6 +43,18 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
     return self;
 }
 
+#pragma mark - Public
+
+- (void)setMinValue:(CGFloat)minValue maxValue:(CGFloat)maxValue {
+    self.maximumValue = maxValue;
+    self.minimumValue = minValue;
+}
+
+- (void)setLeftValue:(CGFloat)leftValue rightValue:(CGFloat)rightValue {
+    self.rightValue = rightValue;
+    self.leftValue = leftValue;
+}
+
 #pragma mark - Configuration
 
 - (void)setDefaults
@@ -92,7 +104,7 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
 - (CGSize)intrinsicContentSize {
     CGFloat width = _trackImage.size.width + _leftThumbImage.size.width + _rightThumbImage.size.width;
     CGFloat height = MAX(_leftThumbImage.size.height, _rightThumbImage.size.height);
-    
+
     return CGSizeMake(width, height);
 }
 
@@ -101,7 +113,7 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
     // Calculate coords & sizes
     CGFloat width = CGRectGetWidth(self.frame);
     CGFloat height = CGRectGetHeight(self.frame);
-    
+
     CGFloat trackHeight = _trackImage.size.height;
 
     CGSize leftThumbImageSize = self.leftThumbImageView.frame.size;

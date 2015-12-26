@@ -12,13 +12,17 @@ Please check Demo project for a basic example on how to use MARKRangeSlider.
 ![Alt text](https://cloud.githubusercontent.com/assets/10529867/6666031/88515f20-cbe0-11e4-83d7-a8bca824ab67.gif "Demo")
 
 ### Available control properties
-- `minimumValue` - the minimum value of the slider's range
-- `maximumValue` - the maximum value of the slider's range
-- `leftValue` - the value of the left thumb
-- `rightValue` - the value of the right thumb
+- `minimumValue` - the minimum value of the slider's range (readonly)
+- `maximumValue` - the maximum value of the slider's range (readonly)
+- `leftValue` - the value of the left thumb (readonly)
+- `rightValue` - the value of the right thumb (readonly)
 - `minimumDistance` - the distance between 2 thumbs (thumbs can't be closer to each other than this distance)
 - `pushable` - allows the user to push both controls
 - `disableOverlapping` - disables the overlaping of thumb controls
+
+### Available control methods
+- `(void)setMinValue:(CGFloat)minValue maxValue:(CGFloat)maxValue`
+- `(void)setLeftValue:(CGFloat)leftValue rightValue:(CGFloat)rightValue`
 
 ## Available styling properties
 Images are customizable, default ones are used when no image is provided.
@@ -37,10 +41,10 @@ Images are customizable, default ones are used when no image is provided.
     [self.rangeSlider addTarget:self
                          action:@selector(rangeSliderValueDidChange:)
                forControlEvents:UIControlEventValueChanged];
-    self.rangeSlider.minimumValue = 0.0;
-    self.rangeSlider.maximumValue = 1.0;
-    self.rangeSlider.leftValue = 0.2;
-    self.rangeSlider.rightValue = 0.7;
+
+    [self.rangeSlider setMinValue:0.0 maxValue:1.0];
+    [self.rangeSlider setLeftValue:0.2 rightValue:0.7];
+
     self.rangeSlider.minimumDistance = 0.2;
 
     [self.view addSubview:self.rangeSlider];

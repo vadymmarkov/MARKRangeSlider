@@ -64,26 +64,26 @@
 
 - (void)testSetMinimumValueGreaterThanOeEqualToMaximumValue
 {
-    self.rangeSlider.maximumValue = 1.0f;
-    self.rangeSlider.minimumValue = 1.2f;
+    [self.rangeSlider setMinValue:1.2f maxValue:1.0f];
 
     XCTAssertEqual(self.rangeSlider.minimumValue, self.rangeSlider.maximumValue - self.rangeSlider.minimumDistance, @"Minimum value should be less than maximum value");
-    self.rangeSlider.minimumValue = 1.0;
+
+    [self.rangeSlider setMinValue:1.0f maxValue:1.0f];
     XCTAssertEqual(self.rangeSlider.minimumValue, self.rangeSlider.maximumValue - self.rangeSlider.minimumDistance, @"Minimum value should be less than maximum value");
 }
 
 - (void)testSetMinimumValueGreaterThanLeftValue
 {
-    self.rangeSlider.leftValue = 0.3;
-    self.rangeSlider.minimumValue = 0.4;
+    [self.rangeSlider setLeftValue:0.3 rightValue:1.0];
+    [self.rangeSlider setMinValue:0.4f maxValue:1.0f];
 
     XCTAssertEqual(self.rangeSlider.leftValue, self.rangeSlider.minimumValue, @"Left value should be equal to minimum value");
 }
 
 - (void)testSetMinimumValueGreaterThanRightValue
 {
-    self.rangeSlider.rightValue = 1.0;
-    self.rangeSlider.minimumValue = 1.2;
+    [self.rangeSlider setLeftValue:0.0 rightValue:1.0];
+    [self.rangeSlider setMinValue:1.2f maxValue:1.0f];
 
     XCTAssertGreaterThanOrEqual(self.rangeSlider.rightValue, self.rangeSlider.minimumValue, @"Right value should be greater than or equal to minimum value");
     XCTAssertEqual(self.rangeSlider.rightValue, self.rangeSlider.maximumValue, @"Right value should be equal to maximum value");
@@ -93,18 +93,18 @@
 
 - (void)testSetMaximumValueLessThanOeEqualToMinimumValue
 {
-    self.rangeSlider.minimumValue = 0.5;
-    self.rangeSlider.maximumValue = 0.4;
+    [self.rangeSlider setMinValue:0.5f maxValue:0.4f];
 
     XCTAssertEqual(self.rangeSlider.maximumValue, self.rangeSlider.minimumValue + self.rangeSlider.minimumDistance, @"Maximum value should be greater than maximum value");
-    self.rangeSlider.maximumValue = 0.5;
+
+    [self.rangeSlider setMinValue:0.5f maxValue:0.5f];
     XCTAssertEqual(self.rangeSlider.maximumValue, self.rangeSlider.minimumValue + self.rangeSlider.minimumDistance, @"Maximum value should be greater than maximum value");
 }
 
 - (void)testSetMaximumValueLessThanLeftValue
 {
-    self.rangeSlider.leftValue = 0.3;
-    self.rangeSlider.maximumValue = 0.2;
+    [self.rangeSlider setLeftValue:0.3 rightValue:1.0];
+    [self.rangeSlider setMinValue:0.0f maxValue:0.2f];
 
     XCTAssertLessThan(self.rangeSlider.leftValue, self.rangeSlider.maximumValue, @"Left value should be less than maximum value");
     XCTAssertEqual(self.rangeSlider.leftValue, self.rangeSlider.minimumValue, @"Left value should be equal to minimum value");
@@ -112,8 +112,8 @@
 
 - (void)testSetMaximumValueLessThanRightValue
 {
-    self.rangeSlider.rightValue = 1.0;
-    self.rangeSlider.maximumValue = 0.8;
+    [self.rangeSlider setLeftValue:0.0 rightValue:1.0];
+    [self.rangeSlider setMinValue:0.0f maxValue:0.8f];
 
     XCTAssertEqual(self.rangeSlider.rightValue, self.rangeSlider.maximumValue, @"Right value should be equal to maximum value");
 }
@@ -123,37 +123,34 @@
 - (void)testSetLeftValuePushesRightValue
 {
     self.rangeSlider.pushable = YES;
-    self.rangeSlider.rightValue = 0.7;
     self.rangeSlider.minimumDistance = 0.2;
-    self.rangeSlider.leftValue = 0.6;
+    [self.rangeSlider setLeftValue:0.6 rightValue:0.7];
+
     XCTAssertEqual(self.rangeSlider.rightValue, self.rangeSlider.leftValue + self.rangeSlider.minimumDistance, @"Right value should be equal to left value plus minimum distance");
 }
 
 - (void)testSetLeftValueDoesntPushRightValue
 {
     self.rangeSlider.pushable = YES;
-    self.rangeSlider.rightValue = 1.0;
     self.rangeSlider.minimumDistance = 0.2;
-    self.rangeSlider.leftValue = 0.9;
+    [self.rangeSlider setLeftValue:0.9 rightValue:1.0];
+
     XCTAssertEqual(self.rangeSlider.leftValue, self.rangeSlider.rightValue - self.rangeSlider.minimumDistance, @"Left value should be equal to right value minus minimum distance");
 }
 
 - (void)testSetLeftValueExceedsMinimumDistance
 {
-    self.rangeSlider.rightValue = 1.0;
     self.rangeSlider.minimumDistance = 0.2;
-    self.rangeSlider.leftValue = 0.9;
+    [self.rangeSlider setLeftValue:0.9 rightValue:1.0];
 
     XCTAssertEqual(self.rangeSlider.leftValue, self.rangeSlider.rightValue - self.rangeSlider.minimumDistance, @"Left value should not exceed minimum distance with right value");
 }
 
 - (void)testSetLeftValueExceedsMinimumDistanceAndLessThanMinimumValue
 {
-    self.rangeSlider.minimumValue = 0.0;
-    self.rangeSlider.maximumValue = 1.0;
+    [self.rangeSlider setMinValue:0.0f maxValue:1.0f];
     self.rangeSlider.minimumDistance = 0.2;
-    self.rangeSlider.rightValue = 0.1;
-    self.rangeSlider.leftValue = 0.1;
+    [self.rangeSlider setLeftValue:0.1 rightValue:0.1];
 
     XCTAssertEqual(self.rangeSlider.leftValue, self.rangeSlider.rightValue - self.rangeSlider.minimumDistance, @"Left value should not exceed minimum distance with right value");
     XCTAssertEqual(self.rangeSlider.leftValue, self.rangeSlider.minimumValue, @"Left value should be equal to minimum value");
@@ -161,8 +158,8 @@
 
 - (void)testSetLeftValueLessThanMinimumValue
 {
-    self.rangeSlider.minimumValue = 0.2;
-    self.rangeSlider.leftValue = 0.1;
+    [self.rangeSlider setMinValue:0.2f maxValue:1.0f];
+    [self.rangeSlider setLeftValue:0.1 rightValue:1.0];
 
     XCTAssertEqual(self.rangeSlider.leftValue, self.rangeSlider.minimumValue, @"Left value should not be less than minimum value");
 }
@@ -172,9 +169,9 @@
 - (void)testSetRightValuePushesLeftValue
 {
     self.rangeSlider.pushable = YES;
-    self.rangeSlider.minimumDistance = 0.2;
-    self.rangeSlider.leftValue = 0.6;
-    self.rangeSlider.rightValue = 0.7;
+    self.rangeSlider.minimumDistance = 0.2f;
+    [self.rangeSlider setLeftValue:0.6f rightValue:0.7f];
+
     XCTAssertEqual(self.rangeSlider.leftValue, self.rangeSlider.rightValue - self.rangeSlider.minimumDistance, @"Left value should be equal to right value minus minimum distance");
 }
 
@@ -182,46 +179,40 @@
 {
     self.rangeSlider.pushable = YES;
     self.rangeSlider.minimumDistance = 0.2;
-    self.rangeSlider.leftValue = 0.0;
-    self.rangeSlider.rightValue = 0.1;
+    [self.rangeSlider setLeftValue:0.0 rightValue:0.1];
+
     XCTAssertEqual(self.rangeSlider.rightValue, self.rangeSlider.leftValue + self.rangeSlider.minimumDistance, @"Right value should be equal to left value plus minimum distance");
 }
 
 - (void)testSetRightValueExceedsMinimumDistance
 {
-    self.rangeSlider.leftValue = 0.5;
     self.rangeSlider.minimumDistance = 0.2;
-    self.rangeSlider.rightValue = 0.6;
+    [self.rangeSlider setLeftValue:0.5 rightValue:0.6];
 
     XCTAssertEqual(self.rangeSlider.rightValue, self.rangeSlider.leftValue + self.rangeSlider.minimumDistance, @"Right value should not exceed minimum distance with left value");
 }
 
 - (void)testSetRightValueGreaterThanMaximumValue
 {
-    self.rangeSlider.maximumValue = 1.0;
-    self.rangeSlider.rightValue = 1.1;
+    [self.rangeSlider setMinValue:0.0f maxValue:1.0f];
+    [self.rangeSlider setLeftValue:0.0 rightValue:1.1];
 
     XCTAssertEqual(self.rangeSlider.rightValue, self.rangeSlider.maximumValue, @"Right value should not be greater than maximum value");
 }
 
 - (void)testSetRightValueExceedsMinimumDistanceAndGreaterThanMaximumValue
 {
-    self.rangeSlider.minimumValue = 0.0;
-    self.rangeSlider.maximumValue = 1.0;
-    self.rangeSlider.minimumDistance = 0.2;
-    self.rangeSlider.leftValue = 0.9;
-    self.rangeSlider.rightValue = 0.9;
+    [self.rangeSlider setMinValue:0.0f maxValue:1.0f];
+    [self.rangeSlider setLeftValue:0.9f rightValue:0.9f];
 
     XCTAssertEqual(self.rangeSlider.rightValue, self.rangeSlider.leftValue + self.rangeSlider.minimumDistance, @"Right value should not exceed minimum distance with left value");
-    XCTAssertEqual(self.rangeSlider.rightValue, self.rangeSlider.maximumValue, @"Right value should be equal to maximum value");
 }
 
 #pragma mark - Minimum distance tests
 
 - (void)testSetMinimumDistanceGreaterThanRangeDistance
 {
-    self.rangeSlider.minimumValue = 0.0;
-    self.rangeSlider.maximumValue = 1.0;
+    [self.rangeSlider setMinValue:0.0f maxValue:1.0f];
     self.rangeSlider.minimumDistance = 2.0;
 
     XCTAssertEqual(self.rangeSlider.minimumDistance, self.rangeSlider.maximumValue - self.rangeSlider.minimumValue, @"Minimum distance should not exceed range distance");
@@ -229,8 +220,7 @@
 
 - (void)testSetMinimumDistanceConflictsWithDistanceBetweenRightAndLeftValues
 {
-    self.rangeSlider.leftValue = 0.2;
-    self.rangeSlider.rightValue = 0.5;
+    [self.rangeSlider setLeftValue:0.2 rightValue:0.5];
     self.rangeSlider.minimumDistance = 0.5;
 
     XCTAssertEqual(self.rangeSlider.minimumDistance, 0.5, @"Minimum distance does not set properly");
@@ -269,8 +259,7 @@
 - (void)testCheckMinimumDistance
 {
     self.rangeSlider.minimumDistance = 0.2;
-    self.rangeSlider.minimumValue = 0.4;
-    self.rangeSlider.maximumValue = 0.5;
+    [self.rangeSlider setMinValue:0.4f maxValue:0.5f];
 
     XCTAssertEqual(self.rangeSlider.minimumDistance, 0.0f, @"Minimum distance should be equal to 0.0");
 }

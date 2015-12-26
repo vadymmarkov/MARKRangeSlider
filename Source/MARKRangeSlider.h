@@ -3,11 +3,11 @@
 @interface MARKRangeSlider : UIControl
 
 // Values
-@property (nonatomic, assign) CGFloat minimumValue;
-@property (nonatomic, assign) CGFloat maximumValue;
+@property (nonatomic, assign, readonly) CGFloat minimumValue;
+@property (nonatomic, assign, readonly) CGFloat maximumValue;
 
-@property (nonatomic, assign) CGFloat leftValue;
-@property (nonatomic, assign) CGFloat rightValue;
+@property (nonatomic, assign, readonly) CGFloat leftValue;
+@property (nonatomic, assign, readonly) CGFloat rightValue;
 
 @property (nonatomic, assign) CGFloat minimumDistance;
 
@@ -20,5 +20,9 @@
 
 @property (nonatomic) UIImage *leftThumbImage;
 @property (nonatomic) UIImage *rightThumbImage;
+
+// Configuration
+- (void)setMinValue:(CGFloat)minValue maxValue:(CGFloat)maxValue;
+- (void)setLeftValue:(CGFloat)leftValue rightValue:(CGFloat)rightValue;
 
 @end
