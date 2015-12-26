@@ -214,8 +214,15 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
 
 - (UIImage *)trackImage
 {
+  NSString *bundlePath = [[[NSBundle bundleForClass:self.class] resourcePath] stringByAppendingPathComponent:@"MARKRangeSlider.bundle"];
+  NSBundle *bundle = [NSBundle bundleWithPath: bundlePath];
+  UITraitCollection *trait = [UITraitCollection traitCollectionWithDisplayScale:2.0];
+
+  // Minus Button
+  UIImage *minusImage = [UIImage imageNamed:@"minus" inBundle:bundle compatibleWithTraitCollection:trait];
+
     if (!_trackImage) {
-        _trackImage = [UIImage imageNamed:kMARKRangeSliderTrackImage];
+        _trackImage = [UIImage image imageNamed:kMARKRangeSliderTrackImage];
     }
     return _trackImage;
 }
@@ -396,6 +403,17 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
 }
 
 #pragma mark - Helpers
+
+- (UIImage *)bundleImageNamed:(NSString *)imageName
+{
+  NSString *bundlePath = [[[NSBundle bundleForClass:self.class] resourcePath]
+                          stringByAppendingPathComponent:@"MARKRangeSlider.bundle"];
+  NSBundle *bundle = [NSBundle bundleWithPath: bundlePath];
+  UITraitCollection *trait = [UITraitCollection traitCollectionWithDisplayScale:2.0];
+  UIImage *image = [UIImage imageNamed:imageName inBundle:bundle compatibleWithTraitCollection:trait];
+
+  return image;
+}
 
 - (void)checkMinimumDistance
 {
