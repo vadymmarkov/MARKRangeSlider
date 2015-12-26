@@ -214,15 +214,8 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
 
 - (UIImage *)trackImage
 {
-  NSString *bundlePath = [[[NSBundle bundleForClass:self.class] resourcePath] stringByAppendingPathComponent:@"MARKRangeSlider.bundle"];
-  NSBundle *bundle = [NSBundle bundleWithPath: bundlePath];
-  UITraitCollection *trait = [UITraitCollection traitCollectionWithDisplayScale:2.0];
-
-  // Minus Button
-  UIImage *minusImage = [UIImage imageNamed:@"minus" inBundle:bundle compatibleWithTraitCollection:trait];
-
     if (!_trackImage) {
-        _trackImage = [UIImage image imageNamed:kMARKRangeSliderTrackImage];
+        _trackImage = [self bundleImageNamed: kMARKRangeSliderTrackImage];
     }
     return _trackImage;
 }
@@ -230,7 +223,7 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
 - (UIImage *)rangeImage
 {
     if (!_rangeImage) {
-        _rangeImage = [UIImage imageNamed:kMARKRangeSliderTrackRangeImage];
+        _rangeImage = [self bundleImageNamed: kMARKRangeSliderTrackRangeImage];
     }
     return _rangeImage;
 }
@@ -238,7 +231,7 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
 - (UIImage *)leftThumbImage
 {
     if (!_leftThumbImage) {
-        _leftThumbImage = [UIImage imageNamed:kMARKRangeSliderThumbImage];
+        _leftThumbImage = [self bundleImageNamed: kMARKRangeSliderThumbImage];
     }
     return _leftThumbImage;
 }
@@ -246,7 +239,7 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
 - (UIImage *)rightThumbImage
 {
     if (!_rightThumbImage) {
-        _rightThumbImage = [UIImage imageNamed:kMARKRangeSliderThumbImage];
+        _rightThumbImage = [self bundleImageNamed: kMARKRangeSliderThumbImage];
     }
     return _rightThumbImage;
 }
