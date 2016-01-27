@@ -9,6 +9,9 @@
 @property (nonatomic, assign, readonly) CGFloat leftValue;
 @property (nonatomic, assign, readonly) CGFloat rightValue;
 
+@property (nonatomic, readonly) UIView *leftThumbView;
+@property (nonatomic, readonly) UIView *rightThumbView;
+
 @property (nonatomic, assign) CGFloat minimumDistance;
 
 @property (nonatomic) BOOL pushable;

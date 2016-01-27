@@ -212,6 +212,16 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
 
 #pragma mark - Getters
 
+- (UIView *)leftThumbView
+{
+    return self.leftThumbImageView;
+}
+
+- (UIView *)rightThumbView
+{
+    return self.rightThumbImageView;
+}
+
 - (UIImage *)trackImage
 {
     if (!_trackImage) {
