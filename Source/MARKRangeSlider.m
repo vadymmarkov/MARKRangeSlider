@@ -409,13 +409,33 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
 
 - (UIImage *)bundleImageNamed:(NSString *)imageName
 {
-  NSString *bundlePath = [[[NSBundle bundleForClass:self.class] resourcePath]
-                          stringByAppendingPathComponent:@"MARKRangeSlider.bundle"];
-  NSBundle *bundle = [NSBundle bundleWithPath: bundlePath];
-  UITraitCollection *trait = [UITraitCollection traitCollectionWithDisplayScale:2.0];
-  UIImage *image = [UIImage imageNamed:imageName inBundle:bundle compatibleWithTraitCollection:trait];
+    NSString *bundlePath = [[[NSBundle bundleForClass:self.class] resourcePath]
+                            stringByAppendingPathComponent:@"MARKRangeSlider.bundle"];
+    NSBundle *bundle = [NSBundle bundleWithPath: bundlePath];
+    if ([UITraitCollection class]) {
+        // Use default traits associated with main screen
+        return [UIImage imageNamed:imageName inBundle:bundle compatibleWithTraitCollection:nil];
+    } else {
+        // Backward compatible for pre iOS 8
+        return [self imageNamed:imageName inBundle:bundle];
+    }
+}
 
-  return image;
+- (UIImage *)imageNamed:(NSString *)imageName inBundle:(NSBundle *)bundle
+{
+    if ([UIScreen instancesRespondToSelector:@selector(scale)]) {
+        NSInteger scale = [[UIScreen mainScreen] scale];
+        NSString *scalledImagePath = [[bundle resourcePath]
+                            stringByAppendingPathComponent:[NSString stringWithFormat:@"%@@%dx.%@",
+                                                            [imageName stringByDeletingPathExtension],
+                                                            scale,
+                                                            [imageName pathExtension]]];
+        
+        if ([[NSFileManager defaultManager] fileExistsAtPath:scalledImagePath]) {
+            return [[UIImage alloc] initWithContentsOfFile:scalledImagePath];
+        }
+    }
+    return nil;
 }
 
 - (void)checkMinimumDistance
