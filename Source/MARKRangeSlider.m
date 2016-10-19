@@ -160,6 +160,12 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
     }
     self.rangeImageView.frame = CGRectMake(leftX + leftInset, trackY, rangeWidth, trackHeight);
 
+    // Set thumb image view frame sizes
+    CGRect leftImageViewFrame = { CGPointMake(0, 0), leftThumbImageSize };
+    CGRect rightImageViewFrame = { CGPointMake(0, 0), rightThumbImageSize };
+    self.leftThumbImageView.frame = leftImageViewFrame;
+    self.rightThumbImageView.frame = rightImageViewFrame;
+
     // Set left & right thumb frames
     leftX += leftInset;
     rightX += rightInset;
