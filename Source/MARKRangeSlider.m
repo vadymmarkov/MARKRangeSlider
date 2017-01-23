@@ -51,8 +51,13 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
 }
 
 - (void)setLeftValue:(CGFloat)leftValue rightValue:(CGFloat)rightValue {
-    self.rightValue = rightValue;
-    self.leftValue = leftValue;
+    if (leftValue == 0 && rightValue == 0) {
+        self.leftValue = leftValue;
+        self.rightValue = rightValue;
+    } else {
+        self.rightValue = rightValue;
+        self.leftValue = leftValue;
+    }
 }
 
 #pragma mark - Configuration
