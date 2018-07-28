@@ -437,9 +437,9 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
     if ([UIScreen instancesRespondToSelector:@selector(scale)]) {
         NSInteger scale = [[UIScreen mainScreen] scale];
         NSString *scalledImagePath = [[bundle resourcePath]
-                            stringByAppendingPathComponent:[NSString stringWithFormat:@"%@@%dx.%@",
+                            stringByAppendingPathComponent:[NSString stringWithFormat:@"%@@%ldx.%@",
                                                             [imageName stringByDeletingPathExtension],
-                                                            scale,
+                                                            (long) scale,
                                                             [imageName pathExtension]]];
         
         if ([[NSFileManager defaultManager] fileExistsAtPath:scalledImagePath]) {
