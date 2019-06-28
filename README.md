@@ -19,6 +19,7 @@ Please check Demo project for a basic example on how to use MARKRangeSlider.
 - `minimumDistance` - the distance between 2 thumbs (thumbs can't be closer to each other than this distance)
 - `pushable` - allows the user to push both controls
 - `disableOverlapping` - disables the overlaping of thumb controls
+- `sendInstantUpdates` - allows the user to select between instant updates and after completing drag of thumb 
 
 ### Available control methods
 - `(void)setMinValue:(CGFloat)minValue maxValue:(CGFloat)maxValue`
