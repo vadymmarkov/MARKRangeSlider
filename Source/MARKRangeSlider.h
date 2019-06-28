@@ -16,6 +16,7 @@
 
 @property (nonatomic) BOOL pushable;
 @property (nonatomic) BOOL disableOverlapping;
+@property (nonatomic) BOOL sendInstantUpdates;
 
 // Images
 @property (nonatomic) UIImage *trackImage;

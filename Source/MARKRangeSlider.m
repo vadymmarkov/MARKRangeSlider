@@ -69,6 +69,7 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
     self.leftValue = self.minimumDistance;
     self.rightValue = self.maximumValue;
     self.minimumDistance = 0.2f;
+    self.sendInstantUpdates = YES;
 }
 
 - (void)setUpViewComponents
@@ -198,7 +199,13 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
 
         [gesture setTranslation:CGPointZero inView:self];
 
-        [self sendActionsForControlEvents:UIControlEventValueChanged];
+        if (self.sendInstantUpdates) {
+            [self sendActionsForControlEvents:UIControlEventValueChanged];
+        }
+    }
+    
+    if (gesture.state == UIGestureRecognizerStateEnded && !self.sendInstantUpdates) {
+          [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
 }
 
@@ -217,6 +224,12 @@ static NSString * const kMARKRangeSliderTrackRangeImage = @"rangeSliderTrackRang
 
         [gesture setTranslation:CGPointZero inView:self];
 
+        if (self.sendInstantUpdates) {
+            [self sendActionsForControlEvents:UIControlEventValueChanged];
+        }
+        
+    }
+    if (gesture.state == UIGestureRecognizerStateEnded && !self.sendInstantUpdates) {
         [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
 }
