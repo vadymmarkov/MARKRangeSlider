@@ -63,7 +63,7 @@ static CGFloat const kViewControllerLabelWidth = 100.0;
     [self.rangeSlider addTarget:self
                          action:@selector(rangeSliderValueDidChange:)
                forControlEvents:UIControlEventValueChanged];
-
+    self.rangeSlider.sendInstantUpdates = YES;
     [self.rangeSlider setMinValue:0.0 maxValue:1.0];
     [self.rangeSlider setLeftValue:0.2 rightValue:0.7];
 
