@@ -56,6 +56,25 @@ Images are customizable, default ones are used when no image is provided.
     NSLog(@"%0.2f - %0.2f", slider.leftValue, slider.rightValue);
 }
 
+//For Swift 3
+func rangeSliderValueDidChange(_ slider: MARKRangeSlider) {
+        print("right \(slider.rightValue) left \(slider.leftValue)")
+        
+    }
+    
+override func viewDidLoad() {
+        let rangeSlider = MARKRangeSlider(frame: CGRect(x: 0, y: 0, width: fuelLevelRangeSliderView.frame.width, height: fuelLevelRangeSliderView.frame.height))
+       
+        rangeSlider.addTarget(self, action: #selector(rangeSliderValueDidChange(_:)), for: .valueChanged)
+        
+        rangeSlider.setMinValue(0, maxValue: 100)
+        rangeSlider.setLeftValue(20, rightValue: 100)
+        
+        rangeSlider.minimumDistance = 1.0
+        
+        fuelLevelRangeSliderView.addSubview(rangeSlider)
+    }
+
 ```
 
 ## Installation
@@ -64,6 +83,9 @@ Images are customizable, default ones are used when no image is provided.
 it, simply add the following line to your Podfile:
 
 `pod 'MARKRangeSlider'`
+
+For Swift 3: Don't forget to set a path in your bridging header.
+`#import <MARKRangeSlider/MARKRangeSlider.h>`
 
 ## Author
 
